@@ -382,7 +382,7 @@ var pizzaElementGenerator = function(i) {
 
 /*
 The following function was rewritten as it was computationally costly with adding any value. Scope of original
-function was was recalling multiple computations and looking up numbers every time the loop ran causing Forced Synchrounous
+function was recalling multiple computations and looking up numbers every time the loop ran causing Forced Synchrounous
 Layout Changes that were causing massive jank, ipso facto effecting user experience. Simplified greatly. Used Classroom lesson 
 to iron it out.
 */
@@ -489,7 +489,7 @@ function updatePositions() {
   var top = document.body.scrollTop;
 
   for (var i = 0; i < 5; i++) {
-    phase_arr.push(Math.sin((top / 1250) + i));
+    phase_arr.push(100 * Math.sin((top / 1250) + i));
   }
 
   for (var j = 0; j < items.length; j++) {
@@ -511,11 +511,13 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+// Reduced number of pizzas in for loop to enought to cover page. Moved var elem creation outside of for loop.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+
+  for (var i = 0, elem; i < 24; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
